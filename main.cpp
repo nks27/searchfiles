@@ -10,6 +10,13 @@ void printHelp() {
   std::cout <<"./search /home/neel '*.cpp' 'hello.*'" << std::endl;
 }
 
+/*
+ * isRegExMatch()
+ * Function to implement regular expression. Implementation of complete regex is bigh project and research papers have been published around it.	
+ * This is minimum implementation of regeular expression covering only "*" and ".".
+ * Even this implementation is well known problem of Dynamic Programming and its solution is already known.
+ * So, there is nothing new in this solution. Anyone who knows Dynamic Programming is certainly aware of this solution.
+ */
 bool isRegExMatch(std::string s, std::string p) {
 	int n = s.length(), m = p.length();    
 	bool **states = new bool* [n+1];
@@ -42,6 +49,11 @@ bool isRegExMatch(std::string s, std::string p) {
 	return retVal;
 }
 
+/*
+ * SearchFiles()
+ * This function open the directory using opendir()/readdir() and matches the filename against given pattern using fnmatch().
+ * If filename matches pattern, then it checks if filename matches the given regular expression using isRegExMatch()
+ */
 void SearchFiles(const char* directory, const char* pattern, const char* regExpression) {
     DIR* dir;
     struct dirent* entry;
@@ -59,7 +71,10 @@ void SearchFiles(const char* directory, const char* pattern, const char* regExpr
         std::cout << "Error opening directory" << directory << std::endl;
     }
 }
-
+/* listSubdirectories()
+ * This function open the directory using opendir()/readdir()
+ * and finds out all sub directories and call SearchFiles() on each directory.
+ */
 void listSubdirectories(const char *path, const char* pattern, const char* regExpression) {
     struct dirent *entry;
     DIR *dir = opendir(path);
